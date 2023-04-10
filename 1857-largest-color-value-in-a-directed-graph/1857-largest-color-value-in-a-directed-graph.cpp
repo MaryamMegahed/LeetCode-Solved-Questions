@@ -5,12 +5,9 @@ public:
         vector<vector<int>>adj(n);
         vector<bool>vis(n),instack(n);
         vector<vector<int>>count(n,vector<int>(26));
-        // for(int i=0; i<edges.size(); i++)
-        // {
-        //     adj[edges[i][0]].push_back(edges[i][1]);
-        // }
-         for (auto& edge : edges) {
-            adj[edge[0]].push_back(edge[1]);
+        for(int i=0; i<edges.size(); i++)
+        {
+            adj[edges[i][0]].push_back(edges[i][1]);
         }
         int ans=0;
         for(int i=0; i<n; i++)
@@ -35,7 +32,6 @@ public:
             }
         }
         instack[node]=false;
-        count[node][colors[node]-'a']++;
-        return count[node][colors[node]-'a'];
+        return ++count[node][colors[node]-'a'];
     }
 };
