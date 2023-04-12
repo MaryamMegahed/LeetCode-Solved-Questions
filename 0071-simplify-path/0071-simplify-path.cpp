@@ -19,7 +19,6 @@ public:
                 {   
                     if(s.size())
                     {directory.push(s);
-                     cout<<s<<endl;
                     }
                 }
                 s="";
@@ -43,7 +42,6 @@ public:
             if(i!=0) ans+='/';
             i--;
         }
-        //reverse(ans.begin(),ans.end());
         return ans;
     }
 };
