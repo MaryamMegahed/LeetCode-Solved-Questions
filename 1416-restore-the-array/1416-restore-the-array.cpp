@@ -9,8 +9,7 @@ public:
         for(int start=0; start<n; start++)
         {
             if(s[start]=='0') continue;
-            //addition=(s[start]-'0');
-            for(int end=start,i=0; end<n&&i<=9; end++,i++)
+            for(int end=start; end<n; end++)
             {
                 current=s[end]-'0';
                 if(start==end){addition=current;}
