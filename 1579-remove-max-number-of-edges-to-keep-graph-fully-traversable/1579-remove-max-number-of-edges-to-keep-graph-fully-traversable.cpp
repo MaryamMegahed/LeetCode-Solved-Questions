@@ -1,13 +1,10 @@
 class Solution {
 public:
-    const int m=1e5+5;
     int parent1[100005],parent2[100005];
    
-    int find1(int a){ return a == parent1[a] ? a : parent1[a] = find1(parent1[a]); }
-    void join1(int a, int b) { parent1[find1(b)] = find1(a); }
-    int find2(int a){ return a == parent2[a] ? a : parent2[a] = find2(parent2[a]); }
-    void join2(int a, int b) { parent2[find2(b)] = find2(a); }
-
+    int find(int a,int parent[]){ return a == parent[a] ? a : parent[a] = find(parent[a],parent);}
+    void join(int a, int b,int parent[]) { parent[find(b,parent)] = find(a,parent); }
+ 
     int maxNumEdgesToRemove(int n, vector<vector<int>>& edges) {
         for(int i=0; i<=n; i++) parent1[i] = i;
         for(int i=0; i<=n; i++) parent2[i] = i;
@@ -20,35 +17,35 @@ public:
             v=edges[i][2];
             if(edges[i][0]==1)
             {
-                if(find1(u)==find1(v))
+                if(find(u,parent1)==find(v,parent1))
                 {
                     remove++;
                 }
                 else
                 {
-                    join1(u,v);
+                    join(u,v,parent1);
                 }
             }
             else if(edges[i][0]==2)
             {
-                 if(find2(u)==find2(v))
+                 if(find(u,parent2)==find(v,parent2))
                 {
                     remove++;
                 }
                 else
                 {
-                    join2(u,v);
+                    join(u,v,parent2);
                 }
             }
             else 
             {
-                if((find1(u)==find2(v))&&(find2(u)==find2(v)))
+                if((find(u,parent1)==find(v,parent1))&&(find(u,parent2)==find(v,parent2)))
                 {
                     remove++;
                 }else 
                 {
-                    join1(u,v);
-                    join2(u,v);
+                    join(u,v,parent1);
+                    join(u,v,parent2);
                 }
             }
         }
